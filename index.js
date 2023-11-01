@@ -1,3 +1,5 @@
+
+///initializing chats : reading it from mongodb database using created endpoint
 async function initializeChats() {
     let chats = []
     try{
@@ -22,9 +24,12 @@ chats.forEach((chat) => {
 
 
 const socket = io("https://chatbotopenai-en7k.onrender.com");
+
+//executing emit on a message is clicked to be sent
 const onSendClicked = ()=> {
     let message = document.getElementById("message-input").value
     if(message !== ""){
+        //updating screen when message is sent
         document.getElementById("chat").innerHTML += ` <div class="message sent">
         <div class="message-content">${message}</div>
     </div>`
@@ -34,6 +39,8 @@ const onSendClicked = ()=> {
 }
 
 
+
+//updating screen when message is recieved from the server
 socket.on('servermessage', async function (prompt) {
     document.getElementById("chat").innerHTML += `<div class="message received">
     <div class="message-content">${prompt}</div>
@@ -41,6 +48,7 @@ socket.on('servermessage', async function (prompt) {
   });
 
 
+  //updating screen when there is some error 
   socket.on('servermessageerror', async function (prompt) {
     document.getElementById("chat").innerHTML += `<div class="message received">
     <div class="message-content">Netwrok error occured!!</div>
