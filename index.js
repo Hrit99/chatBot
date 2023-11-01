@@ -1,7 +1,7 @@
 async function initializeChats() {
     let chats = []
     try{
-     resp = await fetch("%SERVER_URL%/allchats");
+     resp = await fetch("https://chatbotopenai-en7k.onrender.com/allchats");
      chats = await resp.json();
     }
     catch(error){
@@ -21,7 +21,7 @@ chats.forEach((chat) => {
   }
 
 
-const socket = io("%SERVER_URL%");
+const socket = io("https://chatbotopenai-en7k.onrender.com");
 const onSendClicked = ()=> {
     let message = document.getElementById("message-input").value
     if(message !== ""){
